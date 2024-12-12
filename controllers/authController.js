@@ -45,3 +45,13 @@ exports.updateProfile = (req, res) => {
     res.json({ message: '회원 정보 수정 성공!' });
   });
 };
+
+exports.deleteAccount = (req, res) => {
+    const userId = req.user.userId;
+  
+    User.deleteUser(userId, (err, result) => {
+      if (err) return res.status(500).json({ error: err.message });
+  
+      res.json({ message: '회원 탈퇴가 완료되었습니다.' });
+    });
+  };

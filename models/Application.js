@@ -10,7 +10,7 @@ class Application {
 
    // 사용자 ID로 지원한 공고 목록 조회
    static getUserApplicationsById(userId, callback) {
-    const sql = 'SELECT job_id FROM Applications WHERE user_id = ? ORDER BY applied_at DESC';
+    const sql = 'SELECT job_id, applied_at FROM Applications WHERE user_id = ? ORDER BY applied_at DESC';
     db.query(sql, [userId], callback);
   }
 

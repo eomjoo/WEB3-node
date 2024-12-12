@@ -29,10 +29,9 @@ exports.getUserApplicationsById = (req, res) => {
     Application.getUserApplicationsById(userId, (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       if (results.length === 0) return res.status(404).json({ message: '지원 내역이 없습니다.' });
-      
-      // job_id만 추출하여 반환
-      const jobIds = results.map(app => app.job_id);
-      res.json({ jobIds });
+  
+      // job_id와 applied_at을 함께 반환
+      res.json({ applications: results });
     });
   };
 

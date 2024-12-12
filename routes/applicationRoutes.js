@@ -45,7 +45,7 @@ router.post('/', authenticateToken, applyForJob);
  * /applications/user/{userId}:
  *   get:
  *     summary: 사용자별 지원한 공고 목록 조회
- *     description: 입력된 사용자 ID에 해당하는 사용자가 지원한 job_id 목록을 반환합니다.
+ *     description: 입력된 사용자 ID에 해당하는 사용자가 지원한 job_id와 지원 시간을 반환합니다.
  *     tags: [Applications]
  *     parameters:
  *       - in: path
@@ -56,17 +56,24 @@ router.post('/', authenticateToken, applyForJob);
  *         description: 조회할 사용자의 ID
  *     responses:
  *       200:
- *         description: 지원한 공고 목록을 반환합니다.
+ *         description: 지원한 공고 목록과 지원 시간을 반환합니다.
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 jobIds:
+ *                 applications:
  *                   type: array
  *                   items:
- *                     type: integer
- *                     example: 1
+ *                     type: object
+ *                     properties:
+ *                       job_id:
+ *                         type: integer
+ *                         example: 1
+ *                       applied_at:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2024-05-01T12:34:56Z"
  *       404:
  *         description: 지원 내역이 없습니다.
  *       500:
@@ -89,7 +96,7 @@ router.get('/user/:userId', getUserApplicationsById);
  *         required: true
  *         schema:
  *           type: integer
- *         description: 취소할 지원의 application ID
+ *         description: 취소할 지원의 applicationID
  *     responses:
  *       200:
  *         description: 지원이 취소되었습니다.

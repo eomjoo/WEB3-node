@@ -12,6 +12,12 @@ class Company {
     const sql = 'SELECT company_name, location FROM companies WHERE company_id = ?';
     db.query(sql, [companyId], callback);
   }
+
+  static getByLocation(location, callback) {
+    const sql = 'SELECT company_name FROM companies WHERE TRIM(location) = ?';
+    db.query(sql, [location.trim()], callback);
+  }
+
 }
 
 module.exports = Company;

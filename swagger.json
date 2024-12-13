@@ -1,0 +1,150 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Job Portal API",
+      "version": "1.0.0",
+      "description": "Job Portal API Documentation"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/bookmarks": {
+        "post": {
+          "summary": "Add or remove a bookmark",
+          "security": [
+            { "bearerAuth": [] }
+          ],
+          "responses": {
+            "200": {
+              "description": "Bookmark toggled successfully"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get user's bookmarks",
+          "security": [
+            { "bearerAuth": [] }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of user's bookmarks"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/companies": {
+        "get": {
+          "summary": "Get all companies",
+          "responses": {
+            "200": {
+              "description": "List of companies"
+            }
+          }
+        }
+      },
+      "/companies/{companyId}": {
+        "get": {
+          "summary": "Get company by ID",
+          "parameters": [
+            {
+              "name": "companyId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID of the company to retrieve"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Company details"
+            },
+            "404": {
+              "description": "Company not found"
+            }
+          }
+        }
+      },
+      "/reviews": {
+        "post": {
+          "summary": "Create a review",
+          "security": [
+            { "bearerAuth": [] }
+          ],
+          "responses": {
+            "201": {
+              "description": "Review created successfully"
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/reviews/company/{companyId}": {
+        "get": {
+          "summary": "Get reviews for a company",
+          "parameters": [
+            {
+              "name": "companyId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID of the company to retrieve reviews for"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of reviews"
+            },
+            "404": {
+              "description": "No reviews found"
+            }
+          }
+        }
+      },
+      "/reviews/{reviewId}": {
+        "delete": {
+          "summary": "Delete a review",
+          "parameters": [
+            {
+              "name": "reviewId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID of the review to delete"
+            }
+          ],
+          "security": [
+            { "bearerAuth": [] }
+          ],
+          "responses": {
+            "200": {
+              "description": "Review deleted successfully"
+            },
+            "403": {
+              "description": "Forbidden"
+            },
+            "404": {
+              "description": "Review not found"
+            }
+          }
+        }
+      }
+    }
+  }
+  

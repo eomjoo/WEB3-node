@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllCompanies, getCompanyById } = require('../controllers/companyController');
+const { getAllCompanies, getCompanyById, getCompaniesByLocation } = require('../controllers/companyController');
 
 /**
  * @swagger
@@ -47,5 +47,32 @@ router.get('/', getAllCompanies);
  *         description: 서버 오류가 발생했습니다.
  */
 router.get('/:companyId', getCompanyById);
+
+/**
+ * @swagger
+ * /companies/search:
+ *   get:
+ *     summary: 위치별 회사 목록 조회
+ *     description: 입력된 위치에 있는 회사 이름 목록을 반환합니다.
+ *     tags: [Companies]
+ *     parameters:
+ *       - in: query
+ *         name: location
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: 조회할 회사의 위치
+ *     responses:
+ *       200:
+ *         description: 해당 위치에 있는 회사 목록을 반환합니다.
+ *       400:
+ *         description: 위치가 입력되지 않았습니다.
+ *       404:
+ *         description: 해당 위치에 회사가 없습니다.
+ *       500:
+ *         description: 서버 오류가 발생했습니다.
+ */
+router.get('/search', getCompaniesByLocation);
+
 
 module.exports = router;

@@ -3,7 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const jobRoutes = require('./routes/jobRoutes');
-const { swaggerUi, specs } = require('./swagger'); // Swagger 모듈 가져오기
+const applicationRoutes = require('./routes/applicationRoutes');
+const bookmarkRoutes = require('./routes/bookmarkRoutes');
+const companyRoutes = require('./routes/companyRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');  
+const errorHandler = require('./middleware/errorHandler'); // 글로벌 에러 핸들러
+const exampleRoutes = require('./routes/exampleRoutes'); // 예제 라우터
+const { swaggerUi, specs } = require('./swagger');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,17 +18,20 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// 기본 라우터 설정
-app.get('/', (req, res) => {
-  res.send('서버가 정상적으로 실행 중입니다!');
-});
+app.use('/api/example', exampleRoutes);
 
-// Swagger UI 라우트 설정
+// Swagger 설정
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // 라우트 설정
 app.use('/auth', authRoutes);
 app.use('/jobs', jobRoutes);
+app.use('/applications', applicationRoutes);
+app.use('/bookmarks', bookmarkRoutes);
+app.use('/companies', companyRoutes);
+app.use('/reviews', reviewRoutes);
+
+app.use(errorHandler);
 
 // 서버 실행
 app.listen(PORT, () => {

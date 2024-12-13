@@ -1,5 +1,6 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+const fs = require('fs');
 
 const options = {
   definition: {
@@ -27,6 +28,10 @@ const options = {
   apis: ['./routes/*.js'], // 라우트 파일 경로
 };
 
-const specs = swaggerJsdoc(options);
+// swaggerSpec을 생성
+const swaggerSpec = swaggerJsdoc(options);
+
+fs.writeFileSync('swagger.json', JSON.stringify(swaggerSpec, null, 2));
+console.log('swagger.json 파일이 생성되었습니다.');
 
 module.exports = { swaggerUi, specs };

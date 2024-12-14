@@ -33,6 +33,12 @@ app.use('/reviews', reviewRoutes);
 
 app.use(errorHandler);
 
+app.use(cors({
+  origin: '*', // 모든 도메인에서의 요청을 허용
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 허용할 HTTP 메서드
+  allowedHeaders: ['Content-Type', 'Authorization'], // 허용할 헤더
+}));
+
 // 서버 실행
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

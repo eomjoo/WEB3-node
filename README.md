@@ -1,7 +1,7 @@
 # SARAMIN REST API
 
-사람인 사이트를 크롤링해 채용 공고, 북마크, 지원, 리뷰 등을 관리하는 REST API를 개발하였습니다
-
+사람인 사이트를 크롤링해 채용 공고, 북마크, 지원, 리뷰 등을 관리하는 REST API를 개발 하였습니다
+`
 ## 사용 기술
 
 - **런타임 환경:** Node.js
@@ -47,8 +47,10 @@ npm run dev
 ```
 
 ## DB
-
+- MYSQL 사용
 - 8080 포트포워딩
+- Jcloud에서 사람인 사이트 크롤링이 되지않아 saramin_jobs.csv파일을 mysql에 직접 집어 넣었습니다.
+
 
 ## API 문서
 
@@ -56,50 +58,34 @@ npm run dev
 
 [Link](http://113.198.66.75:10165/api-docs/#/)
 
-### **Applications**
 
-**지원 및 관심 등록 관련 엔드포인트:**
-
-```
-POST /api/applications/apply/{jobId}         # 채용 공고에 지원합니다.
-DELETE /api/applications/cancel/{applicationId}  # 채용 지원을 취소합니다.
-GET /api/applications                          # 지원 내역을 조회합니다.
-POST /api/applications/bookmark/{jobId}        # 채용 공고를 관심 목록에 추가합니다.
-DELETE /api/applications/bookmark/{jobId}      # 채용 공고를 관심 목록에서 제거합니다.
-GET /api/applications/bookmarks                # 관심 목록을 조회합니다.
-```
-
-### **Auth**
-
-**인증 관련 엔드포인트:**
-
-```
-POST /api/auth/register      # 회원가입을 진행합니다.
-POST /api/auth/login         # 로그인을 진행합니다.
-POST /api/auth/logout        # 로그아웃을 진행합니다.
-POST /api/auth/refresh-token # 인증 토큰을 갱신합니다.
-```
 
 ### **Bookmark**
 
-**관심 목록 관리 :**
+**관심 목록 관리**
 
 ### **Job**
 
-**채용 공고 관리 :**
+**채용 공고 관리**
 
 ### **Review**
 
-**채용 리뷰 관리 :**
+**채용 리뷰 관리**
 
 ### **User**
 
-**지원자 관리:**
+**지원자 관리**
 
 ### **Company**
 
-**회사 정보 관리:**
+**회사 정보 관리**
 
 ### **Application**
 
-**지원 정보 관리:**
+**지원 정보 관리**
+
+
+
+### ** 과제를 하면서 느꼈던점 **
+
+**요구사항을 정확히 파악하고,db를 그에 맞게 설계하는 것이 중요하다 초반 설계를 잘 해놓으면 그 후에 하는 일은 비교적 할만하다**
